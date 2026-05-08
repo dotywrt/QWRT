@@ -1,0 +1,44 @@
+--- a/drivers/dahdi/xpp/xbus-sysfs.c
++++ b/drivers/dahdi/xpp/xbus-sysfs.c
+@@ -396,7 +396,7 @@
+ ATTRIBUTE_GROUPS(xbus_dev);
+ #endif
+ 
+-static int astribank_match(struct device *dev, struct device_driver *driver)
++static int astribank_match(struct device *dev, const struct device_driver *driver)
+ {
+ 	DBG(DEVICES, "SYSFS MATCH: dev->bus_id = %s, driver->name = %s\n",
+ 	    dev_name(dev), driver->name);
+@@ -765,7 +765,7 @@
+ 	return len;
+ }
+ 
+-static int xpd_match(struct device *dev, struct device_driver *driver)
++static int xpd_match(struct device *dev, const struct device_driver *driver)
+ {
+ 	struct xpd_driver *xpd_driver;
+ 	xpd_t *xpd;
+
+--- a/drivers/dahdi/dahdi-sysfs.c
++++ b/drivers/dahdi/dahdi-sysfs.c
+@@ -42,7 +42,7 @@
+ MODULE_PARM_DESC(tools_rootdir,
+ 		"root directory of all tools paths (default /)");
+ 
+-static int span_match(struct device *dev, struct device_driver *driver)
++static int span_match(struct device *dev, const struct device_driver *driver)
+ {
+ 	return 1;
+ }
+
+--- a/drivers/dahdi/dahdi-sysfs-chan.c
++++ b/drivers/dahdi/dahdi-sysfs-chan.c
+@@ -220,7 +220,7 @@
+ 	chan_dbg(DEVICES, chan, "SYSFS\n");
+ }
+ 
+-static int chan_match(struct device *dev, struct device_driver *driver)
++static int chan_match(struct device *dev, const struct device_driver *driver)
+ {
+ 	struct dahdi_chan *chan;
+ 
