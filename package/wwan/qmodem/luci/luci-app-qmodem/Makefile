@@ -67,9 +67,6 @@ choice
 	config PACKAGE_luci-app-qmodem_USE_TOM_CUSTOMIZED_QUECTEL_CM
 	bool "Tom customized Quectel CM"
 
-	config PACKAGE_luci-app-qmodem_USING_QWRT_QUECTEL_CM_5G
-	bool "QWRT Quectel-CM-5G"
-
 	config PACKAGE_luci-app-qmodem_USING_NORMAL_QUECTEL_CM
 	bool "NORMAL Quectel-CM"
 endchoice
