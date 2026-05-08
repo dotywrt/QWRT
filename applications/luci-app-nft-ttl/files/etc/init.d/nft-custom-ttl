@@ -1,0 +1,92 @@
+#!/bin/sh /etc/rc.common
+START=95
+STOP=13
+USE_PROCD=1
+
+. /usr/share/libubox/jshn.sh
+. /lib/functions.sh
+
+NFT="/usr/sbin/nft"
+NFT_DIR="/etc/nftables.d"
+NFT_FILE="$NFT_DIR/ttl64.nft"
+FIREWALL_INCLUDE="/etc/firewall.d/nftttl"
+
+start_service() {
+    config_load 'nftttl'
+    config_get enable 'ttl' 'enabled' '0'
+    [ "$enable" != "1" ] && return 0
+
+    set_if_ttl
+}
+
+set_if_ttl() {
+    config_load 'nftttl'
+    config_get enabled 'ttl' 'enabled' '0'
+    config_get ttl4 'ttl' 'value' '64'
+    config_get hl6 'ttl' 'hl6' '64'
+
+    [ "$enabled" != "1" ] && return 0
+
+    logger -t nft-custom-ttl "Setting IPv4 TTL=$ttl4, IPv6 Hop Limit=$hl6"
+
+    $NFT delete table inet ttl_table 2>/dev/null
+
+    cat > $NFT_FILE <<-EOF
+chain postrouting {
+    type filter hook postrouting priority mangle; policy accept;
+    iifname "br-lan" ip ttl set $ttl4 comment "Reset TTL for br-lan IPv4"
+    iifname "br-lan" ip6 hoplimit set $hl6 comment "Reset Hop Limit for br-lan IPv6"
+}
+EOF
+
+    mkdir -p /etc/firewall.d
+    echo "#!/bin/sh" > "$FIREWALL_INCLUDE"
+    echo "nft -f $NFT_FILE" >> "$FIREWALL_INCLUDE"
+    chmod +x "$FIREWALL_INCLUDE"
+
+    $NFT -f "$NFT_FILE"
+
+    if [ -f /etc/init.d/firewall ]; then
+        /etc/init.d/firewall reload 2>/dev/null || /etc/init.d/firewall restart
+    fi
+
+    for module in shortcut_fe_cm fast_classifier; do
+        if lsmod | grep -q "^${module} "; then
+            rmmod $module 2>/dev/null
+            logger -t nft-custom-ttl "Disabled $module for TTL modification"
+        fi
+    done
+
+    logger -t nft-custom-ttl "TTL rules applied successfully"
+}
+
+stop_service() {
+    logger -t nft-custom-ttl "Removing TTL/HopLimit rules"
+    
+    $NFT delete table inet ttl_table 2>/dev/null
+    
+    rm -f "$NFT_FILE" "$FIREWALL_INCLUDE"
+    
+    if [ -f /etc/init.d/firewall ]; then
+        /etc/init.d/firewall restart
+    fi
+    
+    for module in shortcut_fe_cm fast_classifier; do
+        if [ -e "/lib/modules/$(uname -r)/${module//-/_}.ko" ]; then
+            insmod $module 2>/dev/null
+        fi
+    done
+    
+    logger -t nft-custom-ttl "TTL rules removed"
+}
+
+service_triggers() {
+    procd_add_reload_trigger "nftttl"
+}
+
+reload_service() {
+    logger -t nft-custom-ttl "Reloading TTL configuration"
+    stop_service
+    sleep 1
+    start_service
+}
