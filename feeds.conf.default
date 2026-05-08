@@ -1,0 +1,6 @@
+src-git packages https://github.com/dotywrt/QWRT.git;packages
+src-git luci https://github.com/dotywrt/QWRT.git;luci
+src-git routing https://github.com/dotywrt/QWRT.git;routing
+src-git telephony https://github.com/dotywrt/QWRT.git;telephony
+src-git helloworld https://github.com/dotywrt/QWRT.git;helloworld
+src-git passwall2 https://github.com/dotywrt/QWRT.git;passwall2
