@@ -1,0 +1,851 @@
+<%+header%>
+
+<style type="text/css">
+.nssfw-page {
+	padding: 6px 0;
+	--nssfw-radius: 6px;
+	--nssfw-gap: 14px;
+	--nssfw-shadow: 0 8px 22px rgba(15, 23, 42, 0.08);
+
+	/* default = light */
+	--nssfw-bg-panel: #f3f4f6;
+	--nssfw-bg-card: #ffffff;
+	--nssfw-bg-soft: #eef2f7;
+	--nssfw-bg-soft-2: #f8fafc;
+	--nssfw-bg-badge: #ffffff;
+	--nssfw-border: #d8dee9;
+	--nssfw-border-strong: #cbd5e1;
+	--nssfw-text: #111827;
+	--nssfw-text-soft: #475569;
+	--nssfw-text-muted: #6b7280;
+	--nssfw-accent: #4f6edb;
+	--nssfw-accent-soft: rgba(79, 110, 219, 0.10);
+	--nssfw-accent-soft-2: rgba(79, 110, 219, 0.06);
+	--nssfw-success: #67b346;
+	--nssfw-danger: #ef5b2a;
+	--nssfw-success-text: #ffffff;
+	--nssfw-danger-text: #ffffff;
+}
+
+.nssfw-dark {
+	--nssfw-bg-panel: #555758;
+	--nssfw-bg-card: #343536;
+	--nssfw-bg-soft: #3b4452;
+	--nssfw-bg-soft-2: #2b2c2e;
+	--nssfw-bg-badge: #383d47;
+	--nssfw-border: rgba(40, 41, 43, 0.18);
+	--nssfw-border-strong: rgba(157, 159, 161, 0.24);
+	--nssfw-text: #f3f4f6;
+	--nssfw-text-soft: #d1d5db;
+	--nssfw-text-muted: #94a3b8;
+	--nssfw-accent: #6d8cff;
+	--nssfw-accent-soft: rgba(109, 140, 255, 0.14);
+	--nssfw-accent-soft-2: rgba(109, 140, 255, 0.08);
+	--nssfw-success: #67b346;
+	--nssfw-danger: #ef5b2a;
+	--nssfw-success-text: #ffffff;
+	--nssfw-danger-text: #ffffff;
+	--nssfw-shadow: 0 10px 26px rgba(0, 0, 0, 0.28);
+}
+
+.nssfw-hero {
+	padding: 18px;
+	border-radius: var(--nssfw-radius);
+	margin-bottom: 16px;
+	background: linear-gradient(135deg, var(--nssfw-accent-soft), var(--nssfw-accent-soft-2));
+	border: 1px solid var(--nssfw-border);
+	box-shadow: var(--nssfw-shadow);
+	animation: nssfw-fade-up .4s ease;
+}
+
+.nssfw-title {
+	margin: 0;
+	font-size: 26px;
+	font-weight: 700;
+	color: var(--nssfw-text);
+}
+
+.nssfw-subbar {
+	display: flex;
+	align-items: center;
+	justify-content: flex-end;
+	gap: 12px;
+	margin-top: 10px;
+	flex-wrap: wrap;
+}
+
+.nssfw-control {
+	display: flex;
+	align-items: center;
+	gap: 8px;
+}
+
+.nssfw-control label {
+	font-size: 12px;
+	color: var(--nssfw-text-muted);
+	opacity: .95;
+}
+
+.nssfw-select {
+	min-width: 90px;
+	padding: 6px 10px;
+	border-radius: var(--nssfw-radius);
+	border: 1px solid var(--nssfw-border-strong);
+	background: var(--nssfw-bg-card);
+	color: var(--nssfw-text);
+	outline: none;
+	box-shadow: inset 0 1px 0 rgba(255,255,255,0.03);
+}
+
+.nssfw-grid {
+	display: grid;
+	grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+	gap: var(--nssfw-gap);
+}
+
+.nssfw-card {
+	background: var(--nssfw-bg-card);
+	border: 1px solid var(--nssfw-border);
+	border-radius: var(--nssfw-radius);
+	padding: 14px;
+	box-shadow: var(--nssfw-shadow);
+	transition: .2s ease;
+	animation: nssfw-fade-up .4s ease;
+}
+
+.nssfw-card:hover {
+	transform: translateY(-2px);
+	box-shadow: 0 12px 28px rgba(15, 23, 42, 0.12);
+}
+
+.nssfw-dark .nssfw-card:hover {
+	box-shadow: 0 12px 28px rgba(0, 0, 0, 0.32);
+}
+
+.nssfw-card-title {
+	font-weight: 700;
+	margin-bottom: 10px;
+	font-size: 15px;
+	color: var(--nssfw-text);
+}
+
+.nssfw-values {
+	display: grid;
+	grid-template-columns: repeat(3, minmax(0, 1fr));
+	gap: 8px;
+}
+
+.nssfw-pill {
+	padding: 10px 8px;
+	border-radius: var(--nssfw-radius);
+	text-align: center;
+	background: var(--nssfw-bg-soft);
+	border: 1px solid var(--nssfw-border);
+	min-width: 0;
+}
+
+.nssfw-pill-label {
+	font-size: 10px;
+	text-transform: uppercase;
+	opacity: .88;
+	margin-bottom: 2px;
+	color: var(--nssfw-text-muted);
+	line-height: 1.1;
+}
+
+.nssfw-pill-value {
+	font-weight: 700;
+	font-size: 15px;
+	color: var(--nssfw-text);
+	line-height: 1.2;
+	word-break: break-word;
+}
+
+.nssfw-empty {
+	text-align: center;
+	padding: 12px;
+	opacity: .9;
+	border-radius: var(--nssfw-radius);
+	background: var(--nssfw-bg-soft);
+	color: var(--nssfw-text-muted);
+	border: 1px solid var(--nssfw-border);
+}
+
+.nssfw-loading {
+	text-align: center;
+	padding: 12px;
+	opacity: .85;
+	color: var(--nssfw-text-muted);
+}
+
+.nssfw-wide-card {
+	margin-top: 16px;
+}
+
+.nssfw-info-grid {
+	display: grid;
+	grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+	gap: 10px;
+	margin-top: 8px;
+}
+
+.nssfw-info-item {
+	padding: 12px;
+	border-radius: var(--nssfw-radius);
+	background: var(--nssfw-bg-soft);
+	border: 1px solid var(--nssfw-border);
+}
+
+.nssfw-info-label {
+	font-size: 11px;
+	text-transform: uppercase;
+	letter-spacing: .4px;
+	color: var(--nssfw-text-muted);
+	margin-bottom: 5px;
+}
+
+.nssfw-info-value {
+	font-size: 14px;
+	font-weight: 700;
+	color: var(--nssfw-text);
+	word-break: break-word;
+}
+
+.nssfw-section-title {
+	margin-bottom: 10px;
+	font-size: 14px;
+	font-weight: 700;
+	color: var(--nssfw-text);
+}
+
+.nssfw-if-grid {
+	display: grid;
+	grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+	gap: 10px;
+	align-items: stretch;
+}
+
+.nssfw-if-card {
+	padding: 12px;
+	border-radius: var(--nssfw-radius);
+	background: var(--nssfw-bg-soft);
+	border: 1px solid var(--nssfw-border);
+	transition: .2s ease;
+	height: 100%;
+	box-sizing: border-box;
+	display: flex;
+	flex-direction: column;
+}
+
+.nssfw-if-card:hover {
+	transform: translateY(-2px);
+	box-shadow: 0 8px 20px rgba(15, 23, 42, 0.08);
+}
+
+.nssfw-dark .nssfw-if-card:hover {
+	box-shadow: 0 8px 20px rgba(0, 0, 0, 0.22);
+}
+
+.nssfw-if-name {
+	font-size: 14px;
+	font-weight: 700;
+	color: var(--nssfw-text);
+	margin-bottom: 10px;
+	word-break: break-word;
+	line-height: 1.3;
+	min-height: 20px;
+}
+
+.nssfw-if-meta {
+	display: grid;
+	grid-template-columns: repeat(2, minmax(0, 1fr));
+	gap: 8px;
+	width: 100%;
+}
+
+.nssfw-if-badge {
+	padding: 8px;
+	border-radius: var(--nssfw-radius);
+	background: var(--nssfw-bg-badge);
+	border: 1px solid var(--nssfw-border);
+	box-sizing: border-box;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+	align-items: stretch;
+	min-height: 54px;
+}
+
+.nssfw-if-badge-label {
+	font-size: 10px;
+	text-transform: uppercase;
+	margin-bottom: 6px;
+	color: var(--nssfw-text-muted);
+	text-align: center;
+	line-height: 1.2;
+	min-height: 22px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+.nssfw-if-badge-value {
+	font-size: 13px;
+	font-weight: 700;
+	color: var(--nssfw-text);
+	width: 100%;
+	min-height: 24px;
+	border-radius: 6px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	text-align: center;
+	box-sizing: border-box;
+	padding: 2px 8px;
+	background: var(--nssfw-bg-soft-2);
+	border: 1px solid var(--nssfw-border);
+}
+
+.nssfw-if-on {
+	background: var(--nssfw-success);
+	color: var(--nssfw-success-text);
+	border-color: var(--nssfw-success);
+}
+
+.nssfw-if-off {
+	background: var(--nssfw-danger);
+	color: var(--nssfw-danger-text);
+	border-color: var(--nssfw-danger);
+}
+
+@keyframes nssfw-fade-up {
+	from {
+		opacity: 0;
+		transform: translateY(8px);
+	}
+	to {
+		opacity: 1;
+		transform: translateY(0);
+	}
+}
+
+/* tablet */
+@media screen and (max-width: 900px) {
+	.nssfw-grid {
+		grid-template-columns: 1fr;
+	}
+
+	.nssfw-info-grid {
+		grid-template-columns: 1fr;
+	}
+}
+
+/* mobile */
+@media screen and (max-width: 700px) {
+	.nssfw-page {
+		padding: 2px 0;
+	}
+
+	.nssfw-hero {
+		padding: 10px 12px;
+		border-radius: var(--nssfw-radius);
+		margin-bottom: 12px;
+	}
+
+	.nssfw-title {
+		font-size: 18px;
+		margin-bottom: 10px;
+	}
+
+	.nssfw-subbar {
+		display: block;
+		width: 100%;
+		margin-top: 0;
+	}
+
+	.nssfw-control {
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
+		width: 100%;
+		gap: 8px;
+	}
+
+	.nssfw-control label {
+		font-size: 11px;
+		margin: 0;
+		flex: 0 0 auto;
+	}
+
+	.nssfw-select {
+		min-width: 72px;
+		height: 30px;
+		padding: 4px 8px;
+		font-size: 11px;
+		border-radius: var(--nssfw-radius);
+		margin-left: auto;
+	}
+
+	.nssfw-grid {
+		grid-template-columns: 1fr;
+		gap: 10px;
+	}
+
+	.nssfw-card {
+		padding: 10px;
+		border-radius: var(--nssfw-radius);
+	}
+
+	.nssfw-card-title {
+		font-size: 13px;
+		margin-bottom: 8px;
+	}
+
+	.nssfw-values {
+		grid-template-columns: repeat(3, minmax(0, 1fr));
+		gap: 6px;
+	}
+
+	.nssfw-pill {
+		padding: 7px 4px;
+		border-radius: var(--nssfw-radius);
+	}
+
+	.nssfw-pill-label {
+		font-size: 8px;
+		margin-bottom: 1px;
+		letter-spacing: .2px;
+	}
+
+	.nssfw-pill-value {
+		font-size: 11px;
+	}
+
+	.nssfw-wide-card {
+		margin-top: 12px;
+	}
+
+	.nssfw-info-grid {
+		grid-template-columns: 1fr;
+		gap: 8px;
+	}
+
+	.nssfw-info-item {
+		padding: 9px 10px;
+		border-radius: var(--nssfw-radius);
+	}
+
+	.nssfw-info-label {
+		font-size: 9px;
+		margin-bottom: 3px;
+	}
+
+	.nssfw-info-value {
+		font-size: 12px;
+		line-height: 1.25;
+	}
+
+	.nssfw-section-title {
+		margin-bottom: 8px;
+		font-size: 12px;
+	}
+
+	.nssfw-if-grid {
+		grid-template-columns: 1fr;
+		gap: 8px;
+	}
+
+	.nssfw-if-card {
+		padding: 8px;
+		border-radius: var(--nssfw-radius);
+	}
+
+	.nssfw-if-name {
+		font-size: 12px;
+		margin-bottom: 6px;
+		min-height: auto;
+	}
+
+	.nssfw-if-meta {
+		grid-template-columns: repeat(2, minmax(0, 1fr));
+		gap: 6px;
+	}
+
+	.nssfw-if-badge {
+		padding: 6px;
+		border-radius: var(--nssfw-radius);
+		min-height: 0;
+	}
+
+	.nssfw-if-badge-label {
+		font-size: 8px;
+		line-height: 1.1;
+		min-height: 16px;
+		margin-bottom: 4px;
+	}
+
+	.nssfw-if-badge-value {
+		font-size: 11px;
+		min-height: 20px;
+		border-radius: 5px;
+		padding: 2px 6px;
+	}
+}
+
+/* extra small phone */
+@media screen and (max-width: 420px) {
+	.nssfw-hero {
+		padding: 10px;
+	}
+
+	.nssfw-title {
+		font-size: 17px;
+	}
+
+	.nssfw-subbar {
+		display: block;
+		width: 100%;
+	}
+
+	.nssfw-control {
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
+		width: 100%;
+	}
+
+	.nssfw-card {
+		padding: 8px;
+	}
+
+	.nssfw-card-title {
+		font-size: 12px;
+	}
+
+	.nssfw-values {
+		gap: 4px;
+	}
+
+	.nssfw-pill {
+		padding: 6px 3px;
+		border-radius: 5px;
+	}
+
+	.nssfw-pill-label {
+		font-size: 7px;
+	}
+
+	.nssfw-pill-value {
+		font-size: 10px;
+	}
+
+	.nssfw-if-card {
+		padding: 7px;
+	}
+
+	.nssfw-if-name {
+		font-size: 11px;
+	}
+
+	.nssfw-if-badge {
+		padding: 5px;
+	}
+
+	.nssfw-if-badge-label {
+		font-size: 7px;
+		min-height: 14px;
+	}
+
+	.nssfw-if-badge-value {
+		font-size: 10px;
+		min-height: 18px;
+	}
+}
+
+.px3 {
+	padding: 10px;
+}
+</style>
+
+<div id="nssfw-root" class="nssfw-page">
+	<h2><%:NSS Info%></h2>
+
+	<div class="nssfw-subbar px3">
+		<div class="nssfw-control">
+			<label for="nssfw-interval">Refresh</label>
+			<select id="nssfw-interval" class="nssfw-select">
+				<option value="5"<% if tostring(interval) == "5" then %> selected="selected"<% end %>>5 sec</option>
+				<option value="10"<% if tostring(interval) == "10" then %> selected="selected"<% end %>>10 sec</option>
+				<option value="15"<% if tostring(interval) == "15" then %> selected="selected"<% end %>>15 sec</option>
+			</select>
+		</div>
+	</div>
+
+	<div class="nssfw-grid">
+		<div class="nssfw-card">
+			<div class="nssfw-card-title">NSS Load</div>
+			<div id="metric-load" class="nssfw-loading">Loading...</div>
+		</div>
+
+		<div class="nssfw-card">
+			<div class="nssfw-card-title">CPU</div>
+			<div id="metric-cpu" class="nssfw-loading">Loading...</div>
+		</div>
+
+		<div class="nssfw-card">
+			<div class="nssfw-card-title">Core</div>
+			<div id="metric-core" class="nssfw-loading">Loading...</div>
+		</div>
+
+		<div class="nssfw-card">
+			<div class="nssfw-card-title">WiFi</div>
+			<div id="metric-wifi" class="nssfw-loading">Loading...</div>
+		</div>
+	</div>
+
+	<div class="nssfw-card nssfw-wide-card">
+		<div class="nssfw-card-title">NSS Device Info</div>
+		<div id="diag-main" class="nssfw-info-grid">
+			<div class="nssfw-loading">Loading...</div>
+		</div>
+	</div>
+
+	<div class="nssfw-card nssfw-wide-card">
+		<div class="nssfw-section-title">NSS Interfaces</div>
+		<div id="diag-interfaces" class="nssfw-if-grid">
+			<div class="nssfw-loading">Loading...</div>
+		</div>
+	</div>
+</div>
+
+<script type="text/javascript">
+(function() {
+	var dataUrl = '<%=luci.dispatcher.build_url("admin", "status", "nssfw", "data")%>';
+	var setUrl  = '<%=luci.dispatcher.build_url("admin", "status", "nssfw", "set_interval")%>';
+	var refreshSeconds = parseInt('<%=interval or 5%>', 10) || 5;
+	var pollTimer = null;
+
+	function isDarkMode() {
+		try {
+			var root = document.getElementById('nssfw-root');
+			var bodyBg = getComputedStyle(document.body).backgroundColor;
+			var htmlBg = getComputedStyle(document.documentElement).backgroundColor;
+			var rootColor = root ? getComputedStyle(root).color : null;
+			var bg = bodyBg && bodyBg !== 'rgba(0, 0, 0, 0)' ? bodyBg : htmlBg;
+
+			if (rootColor) {
+				var rgbText = rootColor.match(/\d+/g);
+				if (rgbText && rgbText.length >= 3) {
+					var tr = parseInt(rgbText[0], 10);
+					var tg = parseInt(rgbText[1], 10);
+					var tb = parseInt(rgbText[2], 10);
+					var textIsLight = ((tr * 299 + tg * 587 + tb * 114) / 1000) > 170;
+
+					if (textIsLight)
+						return true;
+				}
+			}
+
+			if (!bg)
+				return false;
+
+			var rgb = bg.match(/\d+/g);
+			if (!rgb || rgb.length < 3)
+				return false;
+
+			var r = parseInt(rgb[0], 10);
+			var g = parseInt(rgb[1], 10);
+			var b = parseInt(rgb[2], 10);
+
+			return ((r * 299 + g * 587 + b * 114) / 1000) < 140;
+		}
+		catch (e) {
+			return false;
+		}
+	}
+
+	function applyDark() {
+		var root = document.getElementById('nssfw-root');
+		if (!root)
+			return;
+
+		if (isDarkMode())
+			root.classList.add('nssfw-dark');
+		else
+			root.classList.remove('nssfw-dark');
+	}
+
+	function esc(str) {
+		if (str === null || str === undefined)
+			return '';
+		return String(str)
+			.replace(/&/g, '&amp;')
+			.replace(/</g, '&lt;')
+			.replace(/>/g, '&gt;')
+			.replace(/"/g, '&quot;')
+			.replace(/'/g, '&#39;');
+	}
+
+	function pill(label, value) {
+		return '<div class="nssfw-pill">' +
+			'<div class="nssfw-pill-label">' + esc(label) + '</div>' +
+			'<div class="nssfw-pill-value">' + esc(value) + '</div>' +
+		'</div>';
+	}
+
+	function renderMetric(el, data) {
+		if (!el)
+			return;
+
+		if (!data) {
+			el.innerHTML = '<div class="nssfw-empty">?</div>';
+			return;
+		}
+
+		el.innerHTML =
+			'<div class="nssfw-values">' +
+				pill('min', data.min || '?') +
+				pill('avg', data.avg || '?') +
+				pill('max', data.max || '?') +
+			'</div>';
+	}
+
+	function infoItem(label, value) {
+		return '<div class="nssfw-info-item">' +
+			'<div class="nssfw-info-label">' + esc(label) + '</div>' +
+			'<div class="nssfw-info-value">' + esc(value || '-') + '</div>' +
+		'</div>';
+	}
+
+	function badgeClass(val) {
+		if (val === 'on')
+			return 'nssfw-if-badge-value nssfw-if-on';
+		if (val === 'off')
+			return 'nssfw-if-badge-value nssfw-if-off';
+		return 'nssfw-if-badge-value';
+	}
+
+	function renderDiag(diag) {
+		var main = document.getElementById('diag-main');
+		var ifaces = document.getElementById('diag-interfaces');
+
+		if (!main || !ifaces)
+			return;
+
+		if (!diag) {
+			main.innerHTML = '<div class="nssfw-empty">No diagnostic data</div>';
+			ifaces.innerHTML = '<div class="nssfw-empty">No interface data</div>';
+			return;
+		}
+
+		main.innerHTML =
+			infoItem('Device', diag.device) +
+			infoItem('Kernel', diag.kernel) +
+			infoItem('CPU Mode', diag.cpu_mode) +
+			infoItem('System', diag.system) +
+			infoItem('NSS FW', diag.nss_fw) +
+			infoItem('MAC80211', diag.mac80211) +
+			infoItem('ATH11K FW', diag.ath11k_fw);
+
+		if (diag.interfaces && diag.interfaces.length) {
+			var ifaceHtml = '';
+
+			for (var i = 0; i < diag.interfaces.length; i++) {
+				var it = diag.interfaces[i] || {};
+
+				ifaceHtml +=
+					'<div class="nssfw-if-card">' +
+						'<div class="nssfw-if-name">' + esc(it.name || '-') + '</div>' +
+						'<div class="nssfw-if-meta">' +
+							'<div class="nssfw-if-badge">' +
+								'<div class="nssfw-if-badge-label">tx-checksumming</div>' +
+								'<div class="' + badgeClass(it.tx) + '">' + esc(it.tx || '-') + '</div>' +
+							'</div>' +
+							'<div class="nssfw-if-badge">' +
+								'<div class="nssfw-if-badge-label">rx-gro-list</div>' +
+								'<div class="' + badgeClass(it.rx) + '">' + esc(it.rx || '-') + '</div>' +
+							'</div>' +
+						'</div>' +
+					'</div>';
+			}
+
+			ifaces.innerHTML = ifaceHtml;
+		}
+		else {
+			ifaces.innerHTML = '<div class="nssfw-empty">No interface data</div>';
+		}
+	}
+
+	function fetchData() {
+		fetch(dataUrl, { cache: 'no-store' })
+			.then(function(r) { return r.json(); })
+			.then(function(data) {
+				var thermal = data && data.Thermal ? data.Thermal : {};
+
+				renderMetric(document.getElementById('metric-load'), data ? data.Load : null);
+				renderMetric(document.getElementById('metric-cpu'), thermal.CPU || null);
+				renderMetric(document.getElementById('metric-core'), thermal.Core || null);
+				renderMetric(document.getElementById('metric-wifi'), thermal.WiFi || null);
+				renderDiag(data ? data.Diag : null);
+				applyDark();
+			})
+			.catch(function() {
+				renderMetric(document.getElementById('metric-load'), null);
+				renderMetric(document.getElementById('metric-cpu'), null);
+				renderMetric(document.getElementById('metric-core'), null);
+				renderMetric(document.getElementById('metric-wifi'), null);
+				renderDiag(null);
+				applyDark();
+			});
+	}
+
+	function startPolling() {
+		if (pollTimer)
+			clearInterval(pollTimer);
+
+		pollTimer = setInterval(fetchData, refreshSeconds * 1000);
+	}
+
+	function saveInterval(val) {
+		var body = 'interval=' + encodeURIComponent(val);
+
+		return fetch(setUrl, {
+			method: 'POST',
+			headers: { 'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8' },
+			body: body
+		})
+		.then(function(r) { return r.json(); })
+		.then(function(res) {
+			if (res && res.success) {
+				refreshSeconds = parseInt(res.interval, 10) || 5;
+				startPolling();
+			}
+		});
+	}
+
+	function initControls() {
+		var sel = document.getElementById('nssfw-interval');
+		if (!sel)
+			return;
+
+		sel.addEventListener('change', function() {
+			saveInterval(this.value);
+		});
+	}
+
+	function init() {
+		applyDark();
+		initControls();
+		fetchData();
+		startPolling();
+		window.addEventListener('resize', applyDark);
+	}
+
+	if (document.readyState === 'loading')
+		document.addEventListener('DOMContentLoaded', init);
+	else
+		init();
+})();
+</script>
+
+<%+footer%>
