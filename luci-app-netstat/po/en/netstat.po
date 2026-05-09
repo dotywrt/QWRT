@@ -1,0 +1,31 @@
+msgid ""
+msgstr ""
+"Content-Type: text/plain; charset=UTF-8\n"
+"Language: en\n"
+
+msgid "NetStat"
+msgstr "NetStat"
+
+msgid "Netstat Config"
+msgstr "Netstat Config"
+
+msgid "Tools"
+msgstr "Tools"
+
+msgid "CPU / RAM"
+msgstr "CPU / RAM"
+
+msgid "DOWNLOAD"
+msgstr "DOWNLOAD"
+
+msgid "UPLOAD"
+msgstr "UPLOAD"
+
+msgid "TEMP"
+msgstr "TEMP"
+
+msgid "Show/Hide IP"
+msgstr "Show/Hide IP"
+
+msgid "VnStats"
+msgstr "VnStats"

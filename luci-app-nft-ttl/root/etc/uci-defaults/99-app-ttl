@@ -1,0 +1,9 @@
+#!/bin/sh
+
+[ -f /etc/init.d/nft-custom-ttl ] && chmod +x /etc/init.d/nft-custom-ttl
+[ -f /etc/init.d/nft-custom-ttl ] && /etc/init.d/nft-custom-ttl enable
+[ -f /etc/init.d/nft-custom-ttl ] && /etc/init.d/nft-custom-ttl start
+/etc/init.d/firewall reload
+[ -e /dev/ttyUSB3 ] && echo "AT+CFUN=1" > /dev/ttyUSB3
+
+exit 0
