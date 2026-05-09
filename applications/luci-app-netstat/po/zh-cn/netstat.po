@@ -1,0 +1,31 @@
+msgid ""
+msgstr ""
+"Content-Type: text/plain; charset=UTF-8\n"
+"Language: zh_CN\n"
+
+msgid "NetStat"
+msgstr "网络状态"
+
+msgid "Netstat Config"
+msgstr "网络状态配置"
+
+msgid "Tools"
+msgstr "工具"
+
+msgid "CPU / RAM"
+msgstr "CPU / 内存"
+
+msgid "DOWNLOAD"
+msgstr "下载"
+
+msgid "UPLOAD"
+msgstr "上传"
+
+msgid "TEMP"
+msgstr "温度"
+
+msgid "Show/Hide IP"
+msgstr "显示/隐藏 IP"
+
+msgid "VnStats"
+msgstr "流量统计"
