@@ -1,0 +1,12 @@
+--- a/drivers/of/of_reserved_mem.c
++++ b/drivers/of/of_reserved_mem.c
+@@ -724,7 +724,8 @@ int of_reserved_mem_region_to_resource(s
+ 	if (!rmem)
+ 		return -EINVAL;
+ 
+-	resource_set_range(res, rmem->base, rmem->size);
++	res->start = rmem->base;
++	res->end = rmem->base + rmem->size - 1;
+ 	res->flags = IORESOURCE_MEM;
+ 	res->name = rmem->name;
+ 	return 0;

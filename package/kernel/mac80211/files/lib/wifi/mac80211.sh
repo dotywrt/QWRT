@@ -351,7 +351,7 @@ mac80211_emit_detect() {
 	key="$default_key"
 	num_global_macaddr="$default_mac_count"
 
-	[ -n "$ssid" ] || ssid="DOTYWRT"
+	[ -n "$ssid" ] || ssid="LEDE"
 	[ -n "$country" ] || country="US"
 
 	case "$band" in
