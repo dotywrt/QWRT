@@ -110,6 +110,12 @@ jobs:
         run: |
           ./scripts/feeds update -a
           ./scripts/feeds install -a
+          
+      - name: Normalize Scripts
+        run: |
+          echo "Fixing line endings & permissions..."
+          find . -type f \( -name "*.sh" -o -name "*.bash" -o -name "*.txt" \) -exec dos2unix {} \;
+          find . -type f \( -name "*.sh" -o -name "*.bash" \) -exec chmod +x {} \;
 
       - name: Set LAN IP if provided
         run: |
