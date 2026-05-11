@@ -1,0 +1,15 @@
+{
+    "luci-app-deviceinfo": {
+        "description": "Grant access to Device Info",
+        "read": {
+            "ubus": {
+                "system": [ "*" ]
+            },
+            "file": {
+                "/bin/lsusb": [ "exec" ],
+                "/usr/bin/lspci": [ "exec" ],
+                "/proc/device-tree/hat/product": [ "read" ]
+            }
+        }
+    }
+}
