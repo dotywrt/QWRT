@@ -1,0 +1,13 @@
+{
+    "admin/status/deviceinfo": {
+        "title": "Device Info",
+        "order": 90,
+        "action": {
+            "type": "view",
+            "path": "deviceinfo/index"
+        },
+        "depends": {
+            "acl": [ "luci-app-deviceinfo" ]
+        }
+    }
+}
