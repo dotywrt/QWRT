@@ -4,7 +4,7 @@
 	<h2>Modem Information</h2>
  
 	<div class="px-panel">
-		<div class="px-panel-title">Device Information</div>
+		<div class="px-panel-title">Device Info</div>
 
 		<div class="px-grid px-grid-3 px-device-grid">
 			<div class="px-stat">
@@ -1062,7 +1062,7 @@ window.onload = function() {
 	detectBodyColorMode();
 	fetchCommPorts();
 	updateModemInfo();
-	updateDeviceInfo();  // <--- TAMBAHKAN BARIS INI
+	updateDeviceInfo(); 
 	updateCellGridMode();
 	window.addEventListener('resize', updateCellGridMode);
 	setInterval(updateModemInfo, refresh_rate);
