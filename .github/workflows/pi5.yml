@@ -18,8 +18,9 @@ on:
         description: "Select build config"
         required: true
         type: choice
-        default: "seed/pi5d.config"
+        default: "seed/pi5l.config"
         options:
+          - seed/pi5l.config
           - seed/pi5d.config
           - seed/pi5m.config
 
