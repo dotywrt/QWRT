@@ -2,6 +2,43 @@
 
 <div class="px-page">
 	<h2>Modem Information</h2>
+ 
+	<div class="px-panel">
+		<div class="px-panel-title">Device Information</div>
+
+		<div class="px-grid px-grid-3 px-device-grid">
+			<div class="px-stat">
+				<div class="px-label">MODEL</div>
+				<div class="px-value" id="device-model">Loading...</div>
+			</div>
+
+			<div class="px-stat">
+				<div class="px-label">HOSTNAME</div>
+				<div class="px-value" id="device-hostname">Loading...</div>
+			</div>
+
+			<div class="px-stat">
+				<div class="px-label">SYSTEM</div>
+				<div class="px-value" id="device-system">Loading...</div>
+			</div>
+
+			<div class="px-stat">
+				<div class="px-label">OPENWRT VERSION</div>
+				<div class="px-value" id="device-owrt-version">Loading...</div>
+			</div>
+
+			<div class="px-stat">
+				<div class="px-label">KERNEL VERSION</div>
+				<div class="px-value" id="device-kernel">Loading...</div>
+			</div>
+
+			<div class="px-stat">
+				<div class="px-label">STORAGE (ROOT)</div>
+				<div class="px-value" id="device-storage">Loading...</div>
+			</div>
+		</div>
+	</div>
+ 
 
 	<div class="px-panel">
 		<div class="px-panel-title">General</div>
@@ -997,12 +1034,35 @@ function fetchCommPorts() {
 		});
 }
 
+function updateDeviceInfo() {
+	fetch('/cgi-bin/luci/admin/modem/modeminfo/get_device_info')
+		.then(function(response) { return response.json(); })
+		.then(function(data) {
+			document.getElementById('device-model').innerText = data.model || 'N/A';
+			document.getElementById('device-hostname').innerText = data.hostname || 'N/A';
+			document.getElementById('device-system').innerText = data.system || 'N/A';
+			document.getElementById('device-owrt-version').innerText = data.openwrt_version || 'N/A';
+			document.getElementById('device-kernel').innerText = data.kernel_version || 'N/A';
+			document.getElementById('device-storage').innerText = data.storage_root || 'N/A';
+		})
+		.catch(function(error) {
+			console.error('Error fetching device info:', error);
+			document.getElementById('device-model').innerText = 'Error loading';
+			document.getElementById('device-hostname').innerText = 'Error loading';
+			document.getElementById('device-system').innerText = 'Error loading';
+			document.getElementById('device-owrt-version').innerText = 'Error loading';
+			document.getElementById('device-kernel').innerText = 'Error loading';
+			document.getElementById('device-storage').innerText = 'Error loading';
+		});
+}
+
 let refresh_rate = <%=refresh_rate%> * 1000;
 
 window.onload = function() {
 	detectBodyColorMode();
 	fetchCommPorts();
 	updateModemInfo();
+	updateDeviceInfo();  // <--- TAMBAHKAN BARIS INI
 	updateCellGridMode();
 	window.addEventListener('resize', updateCellGridMode);
 	setInterval(updateModemInfo, refresh_rate);
