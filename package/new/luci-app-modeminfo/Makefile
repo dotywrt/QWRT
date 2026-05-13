@@ -1,41 +1,24 @@
-# Define the package information
+#
+# Copyright (C) 2023-2026 DotyWrt
+#
+# This is free software, licensed under the Apache License, Version 3.0 .
+#
+
 include $(TOPDIR)/rules.mk
 
 PKG_NAME:=luci-app-modeminfo
-PKG_VERSION:=2.0
-PKG_RELEASE:=0
+PKG_VERSION:=2.1
+PKG_RELEASE:=1
 
-PKG_MAINTAINER:=YiZhen Choo <yizhen.c02@gmail.com>
 PKG_LICENSE:=GPL-3.0
+PKG_MAINTAINER:=dotycat <support@dotycat.com>
 
-LUCI_TITLE:=LuCI App for Modem Information
-LUCI_DESCRIPTION:=This LuCI app provides modem information in a web interface.
-LUCI_DEPENDS:=+luci +sms-tool +kmod-usb-serial-option
+include $(TOPDIR)/feeds/luci/luci.mk
 
-PKG_BUILD_DIR:=$(BUILD_DIR)/$(PKG_NAME)
+LUCI_TITLE:=LuCI Modem Info
+LUCI_DESCRIPTION:=Modern modem information and signal monitoring for OpenWrt
+LUCI_DEPENDS:=+sms-tool +kmod-usb-serial-option
 
-include $(INCLUDE_DIR)/package.mk
+PKG_ARCH:=all
 
-define Package/$(PKG_NAME)
-	SECTION:=luci
-	CATEGORY:=LuCI
-	SUBMENU:=3. Applications
-	TITLE:=$(LUCI_TITLE)
-	PKGARCH:=all
-	DEPENDS:=$(LUCI_DEPENDS)
-endef
-
-define Package/$(PKG_NAME)/description
-	$(LUCI_DESCRIPTION)
-endef
-
-define Build/Compile
-endef
-
-# Files to install
-define Package/$(PKG_NAME)/install
-	$(CP) ./files/* $(1)/
-endef
-
-# Build the package
 $(eval $(call BuildPackage,$(PKG_NAME)))
