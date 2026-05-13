@@ -1,0 +1,175 @@
+msgid ""
+msgstr ""
+"Content-Type: text/plain; charset=UTF-8\n"
+"Language: en\n"
+
+msgid "Modem"
+msgstr "Modem"
+
+msgid "Modem Info"
+msgstr "Modem Info"
+
+msgid "General Information"
+msgstr "General Information"
+
+msgid "Device Info"
+msgstr "Device Info"
+
+msgid "MODEL"
+msgstr "Model"
+
+msgid "HOSTNAME"
+msgstr "Hostname"
+
+msgid "SYSTEM"
+msgstr "System"
+
+msgid "OPENWRT VERSION"
+msgstr "OpenWrt Version"
+
+msgid "KERNEL VERSION"
+msgstr "Kernel Version"
+
+msgid "STORAGE (ROOT)"
+msgstr "Storage (Root)"
+
+msgid "General"
+msgstr "General"
+
+msgid "MODEM"
+msgstr "Modem"
+
+msgid "IMEI"
+msgstr "IMEI"
+
+msgid "TEMPERATURE"
+msgstr "Temperature"
+
+msgid "ISP"
+msgstr "ISP"
+
+msgid "PROTOCOL"
+msgstr "Protocol"
+
+msgid "FIRMWARE VERSION"
+msgstr "Firmware Version"
+
+msgid "COMM PORT"
+msgstr "Comm Port"
+
+msgid "Save"
+msgstr "Save"
+
+msgid "Signal"
+msgstr "Signal"
+
+msgid "NETWORK"
+msgstr "Network"
+
+msgid "CSQ"
+msgstr "CSQ"
+
+msgid "SIGNAL"
+msgstr "Signal"
+
+msgid "RSSI"
+msgstr "RSSI"
+
+msgid "LTE RSRQ"
+msgstr "LTE RSRQ"
+
+msgid "LTE RSRP"
+msgstr "LTE RSRP"
+
+msgid "LTE SINR"
+msgstr "LTE SINR"
+
+msgid "NR5G-NSA RSRQ"
+msgstr "NR5G-NSA RSRQ"
+
+msgid "NR5G-NSA RSRP"
+msgstr "NR5G-NSA RSRP"
+
+msgid "NR5G-NSA SINR"
+msgstr "NR5G-NSA SINR"
+
+msgid "NR5G-SA RSRQ"
+msgstr "NR5G-SA RSRQ"
+
+msgid "NR5G-SA RSRP"
+msgstr "NR5G-SA RSRP"
+
+msgid "NR5G-SA SINR"
+msgstr "NR5G-SA SINR"
+
+msgid "Cell"
+msgstr "Cell"
+
+msgid "MCC / MNC"
+msgstr "MCC / MNC"
+
+msgid "CELL ID"
+msgstr "Cell ID"
+
+msgid "PCC"
+msgstr "PCC"
+
+msgid "SCC 1"
+msgstr "SCC 1"
+
+msgid "SCC 2"
+msgstr "SCC 2"
+
+msgid "SCC 3"
+msgstr "SCC 3"
+
+msgid "SCC 4"
+msgstr "SCC 4"
+
+msgid "Refresh Interval"
+msgstr "Refresh Interval"
+
+msgid "Select refresh rate"
+msgstr "Select refresh rate"
+
+msgid "2 seconds"
+msgstr "2 seconds"
+
+msgid "5 seconds"
+msgstr "5 seconds"
+
+msgid "7 seconds"
+msgstr "7 seconds"
+
+msgid "10 seconds"
+msgstr "10 seconds"
+
+msgid "15 seconds"
+msgstr "15 seconds"
+
+msgid "Loading..."
+msgstr "Loading..."
+
+msgid "No Signal"
+msgstr "No Signal"
+
+msgid "Good"
+msgstr "Good"
+
+msgid "Fair"
+msgstr "Fair"
+
+msgid "Weak"
+msgstr "Weak"
+
+msgid "Poor"
+msgstr "Poor"
+
+msgid "Error loading"
+msgstr "Error loading"
+
+msgid "N/A"
+msgstr "N/A"
+
+msgid "Unknown"
+msgstr "Unknown"
