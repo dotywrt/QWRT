@@ -1,7 +1,7 @@
 <%+header%>
 
 <div class="px-page">
-	<h2>Modem Information</h2>
+	<h2>General Information</h2>
  
 	<div class="px-panel">
 		<div class="px-panel-title">Device Info</div>
@@ -1034,8 +1034,9 @@ function fetchCommPorts() {
 		});
 }
 
+
 function updateDeviceInfo() {
-	fetch('/cgi-bin/luci/admin/modem/modeminfo/get_device_info')
+	fetch('<%=luci.dispatcher.build_url("admin/modem/modeminfo/get_device_info")%>')
 		.then(function(response) { return response.json(); })
 		.then(function(data) {
 			document.getElementById('device-model').innerText = data.model || 'N/A';
@@ -1062,7 +1063,7 @@ window.onload = function() {
 	detectBodyColorMode();
 	fetchCommPorts();
 	updateModemInfo();
-	updateDeviceInfo(); 
+	updateDeviceInfo();
 	updateCellGridMode();
 	window.addEventListener('resize', updateCellGridMode);
 	setInterval(updateModemInfo, refresh_rate);
