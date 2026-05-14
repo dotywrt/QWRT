@@ -7,7 +7,6 @@ modprobe i2c-dev 2>/dev/null
 modprobe i2c-bcm2835 2>/dev/null
 modprobe i2c-brcmstb 2>/dev/null
 
-# Rebuild opkg config
 cat > /etc/opkg.conf <<'EOF'
 dest root /
 dest ram /tmp
