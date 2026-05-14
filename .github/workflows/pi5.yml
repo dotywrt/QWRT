@@ -23,7 +23,13 @@ on:
           - seed/pi5l.config
           - seed/pi5d.config
           - seed/pi5m.config
-
+          
+      build_date:
+        description: "Build Date"
+        required: false
+        default: "14 May 26"
+        type: string
+        
 permissions:
   contents: write
 
@@ -114,11 +120,14 @@ jobs:
           ./scripts/feeds update -a
           ./scripts/feeds install -a
 
-      - name: Update JS File
+      - name: Update JS File + Inject Build Date
         run: |
-          rm -f feeds/luci/modules/luci-mod-status/htdocs/luci-static/resources/view/status/include/10_system.js
-          wget -O feeds/luci/modules/luci-mod-status/htdocs/luci-static/resources/view/status/include/10_system.js \
+          FILE="feeds/luci/modules/luci-mod-status/htdocs/luci-static/resources/view/status/include/10_system.js"
+          rm -f "$FILE"
+          mkdir -p "$(dirname "$FILE")"
+          wget -O "$FILE" \
           https://raw.githubusercontent.com/dotywrt/QWRT/refs/heads/IM-K6.12.74/seed/10_system.js
+          sed -i "s|xxxxxx|$BUILD_DATE|g" "$FILE"
           
       - name: Re Normalize Scripts
         run: |
