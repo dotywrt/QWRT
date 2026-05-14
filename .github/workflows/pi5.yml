@@ -127,7 +127,7 @@ jobs:
           rm -f "$FILE"
           mkdir -p "$(dirname "$FILE")"
           wget -O "$FILE" \
-          https://raw.githubusercontent.com/dotywrt/QWRT/refs/heads/IM-K6.12.74/seed/10_system.js
+          https://raw.githubusercontent.com/dotywrt/QWRT/IM-K6.12.74/seed/10_system.js
           sed -i "s|xxxxxx|$BUILD_DATE|g" "$FILE"
           
       - name: Re Normalize Scripts
