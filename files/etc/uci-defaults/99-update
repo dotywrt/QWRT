@@ -1,5 +1,21 @@
 #!/bin/sh
 
+if grep -qi "Raspberry Pi 5" /proc/device-tree/model 2>/dev/null; then
+    if [ -f /boot/config.txt ]; then
+        grep -q "dtparam=i2c_arm=on" /boot/config.txt || \
+        echo "dtparam=i2c_arm=on" >> /boot/config.txt
+    fi
+
+    if [ -f /boot/firmware/config.txt ]; then
+        grep -q "dtparam=i2c_arm=on" /boot/firmware/config.txt || \
+        echo "dtparam=i2c_arm=on" >> /boot/firmware/config.txt
+    fi
+fi
+  
+modprobe i2c-dev 2>/dev/null
+modprobe i2c-bcm2835 2>/dev/null
+modprobe i2c-brcmstb 2>/dev/null
+
 cat > /etc/opkg.conf <<EOF
 dest root /
 dest ram /tmp
