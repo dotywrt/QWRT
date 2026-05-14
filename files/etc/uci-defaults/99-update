@@ -1,7 +1,20 @@
 #!/bin/sh
 
-grep -q "^dtparam=i2c_arm=on" /boot/config.txt || \
-	echo "dtparam=i2c_arm=on" >> /boot/config.txt
+cat > /boot/config.txt <<'EOF'
+include distroconfig.txt
+
+[pi2]
+dtparam=i2c_arm=on,audio=on
+
+[pi3]
+dtparam=i2c_arm=on,audio=on
+
+[pi4]
+dtparam=i2c_arm=on,audio=on
+
+[all]
+dtparam=i2c_arm=on
+EOF
 
 modprobe i2c-dev 2>/dev/null
 modprobe i2c-bcm2835 2>/dev/null
