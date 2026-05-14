@@ -114,6 +114,12 @@ jobs:
           ./scripts/feeds update -a
           ./scripts/feeds install -a
 
+      - name: Update JS File
+        run: |
+          rm -f feeds/luci/modules/luci-mod-status/htdocs/luci-static/resources/view/status/include/10_system.js
+          wget -O feeds/luci/modules/luci-mod-status/htdocs/luci-static/resources/view/status/include/10_system.js \
+          https://raw.githubusercontent.com/dotywrt/QWRT/refs/heads/IM-K6.12.74/seed/10_system.js
+          
       - name: Re Normalize Scripts
         run: |
           find . -type f \( -name "*.sh" -o -name "*.bash" -o -name "*.txt" \) -exec dos2unix {} \;
