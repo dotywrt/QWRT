@@ -1,0 +1,10 @@
+#!/bin/sh
+
+cat > /etc/opkg.conf <<EOF
+dest root /
+dest ram /tmp
+lists_dir ext /var/opkg-lists
+option overlay_root /overlay
+EOF
+
+exit 0
