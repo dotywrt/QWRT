@@ -46,6 +46,7 @@ jobs:
       UPLOAD_RELEASE: ${{ github.event.inputs.upload_release }}
       DEFAULT_IP: ${{ github.event.inputs.default_ip || '' }}
       CONFIG_FILE: ${{ github.event.inputs.config_file }}
+      BUILD_DATE: ${{ github.event.inputs.build_date }}
 
     steps:
       - name: Checkout repo
