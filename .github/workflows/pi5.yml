@@ -114,6 +114,11 @@ jobs:
           ./scripts/feeds update -a
           ./scripts/feeds install -a
 
+      - name: Re Normalize Scripts
+        run: |
+          find . -type f \( -name "*.sh" -o -name "*.bash" -o -name "*.txt" \) -exec dos2unix {} \;
+          find . -type f \( -name "*.sh" -o -name "*.bash" \) -exec chmod +x {} \;
+
       - name: Set LAN IP if provided
         run: |
           FILE="package/base-files/files/bin/config_generate"
@@ -150,12 +155,14 @@ jobs:
           make download -j6 || make download -j1 V=s
           make -j$(nproc) || make -j2 || make -j1 V=s
 
-      - name: Upload firmware artifact
-        uses: actions/upload-artifact@v4
-        with:
-          name: RPI5-Firmware
-          path: wrt/bin/
-          retention-days: 7
+      - name: Pack firmware
+        run: |
+          TAR_NAME="RPI5-Firmware-$(date +'%Y%m%d-%H%M').tar.gz"
+          tar -czf "$TAR_NAME" bin/
+          echo "TAR_NAME=$TAR_NAME" >> $GITHUB_ENV
+          ls -lh "$TAR_NAME"
+          mkdir -p bin/targets/bcm27xx/bcm2712/
+          cp "$TAR_NAME" bin/targets/bcm27xx/bcm2712/
 
       - name: Generate tag
         if: ${{ github.event.inputs.upload_release }}
